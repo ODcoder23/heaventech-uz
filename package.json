@@ -1,0 +1,19 @@
+{
+  "name": "heaventech-official-platform",
+  "version": "1.0.0",
+  "description": "HeavenTech Korporativ Veb-Platformasi (USAD.UZ transformatsiyasi)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "heaventech",
+    "corporate",
+    "landing",
+    "animation",
+    "react"
+  ],
+  "author": "HeavenTech",
+  "license": "ISC"
+}

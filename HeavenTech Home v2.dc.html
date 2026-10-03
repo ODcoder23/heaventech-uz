@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth;}html,body{margin:0;background:#FFFFFF;color:#0F1B2B;}body{overflow-x:hidden;}*{box-sizing:border-box;}a{color:#3575B7;text-decoration:none;}a:hover{color:#245C8C;}::selection{background:#123E6B;color:#FFFFFF;}input,textarea,button{font:inherit;}</style>
+</helmet>
+<div ref="{{ rootRef }}" style="font-family:Manrope,sans-serif;color:#0F1B2B;background:#FFFFFF;">
+
+  <header data-nav="" style="position:fixed;top:0;left:0;right:0;z-index:90;background:#FFFFFF;border-bottom:1px solid #E6E9ED;transition:box-shadow .3s;">
+    <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+      <a href="#top" style="display:flex;align-items:center;gap:12px;color:#0F1B2B;">
+        <svg viewBox="270 30 700 364" style="width:40px;height:auto;display:block;shape-rendering:crispEdges;">
+          <g fill="#123E6B"><rect x="281" y="40" width="75" height="343"></rect><rect x="495" y="40" width="74" height="343"></rect><rect x="281" y="171" width="360" height="65"></rect><rect x="569" y="171" width="72" height="74"></rect><rect x="569" y="66" width="72" height="38"></rect><rect x="601" y="40" width="40" height="26"></rect><rect x="676" y="40" width="284" height="61"></rect><rect x="779" y="40" width="77" height="343"></rect></g>
+          <rect x="603" y="72" width="26" height="26" fill="#FFFFFF"></rect>
+        </svg>
+        <span style="font-weight:700;font-size:18px;letter-spacing:-.015em;">HeavenTech</span>
+      </a>
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;gap:32px;font-size:14px;font-weight:600;">
+          <sc-for list="{{ t.nav }}" as="n" hint-placeholder-count="6">
+            <a href="{{ n.href }}" style="color:#44505E;transition:color .2s;" style-hover="color:#123E6B;">{{ n.label }}</a>
+          </sc-for>
+        </nav>
+      </sc-if>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div style="display:flex;gap:12px;font-size:13px;font-weight:600;">
+          <sc-for list="{{ langs }}" as="l" hint-placeholder-count="3">
+            <button onClick="{{ l.pick }}" style="background:transparent;border:0;border-bottom:2px solid {{ l.line }};color:{{ l.fg }};padding:4px 0;cursor:pointer;">{{ l.code }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ openRfp }}" style="background:#123E6B;color:#FFFFFF;border:0;border-radius:4px;padding:11px 18px;font-weight:600;font-size:14px;cursor:pointer;transition:background .2s;" style-hover="background:#0D2F52;">{{ t.cta1 }}</button>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+
+  <section id="top" style="background-color:#123E6B;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:24px 24px;color:#FFFFFF;padding-top:72px;">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,11vh,120px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:clamp(56px,9vh,96px);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:clamp(40px,6vw,96px);align-items:center;">
+        <div style="display:flex;flex-direction:column;gap:28px;">
+          <span data-hin="" style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9DBCE0;">{{ t.kicker }}</span>
+          <h1 style="margin:0;font-weight:700;font-size:clamp(38px,4.4vw,68px);line-height:1.08;letter-spacing:-.028em;display:flex;flex-wrap:wrap;column-gap:.25em;">
+            <sc-for list="{{ t.words }}" as="w" hint-placeholder-count="8">
+              <span style="display:inline-block;overflow:hidden;padding-bottom:.08em;"><span data-word="" style="display:inline-block;">{{ w }}</span></span>
+            </sc-for>
+          </h1>
+          <p data-hin="" style="margin:0;font-size:clamp(17px,1.3vw,20px);line-height:1.6;color:#C4D6EA;max-width:520px;text-wrap:pretty;">{{ t.sub }}</p>
+          <div data-hin="" style="display:flex;gap:12px;flex-wrap:wrap;padding-top:4px;">
+            <button onClick="{{ openRfp }}" style="background:#FFFFFF;color:#123E6B;border:0;border-radius:4px;padding:16px 24px;font-weight:600;font-size:16px;cursor:pointer;transition:background .2s;" style-hover="background:#E3ECF6;">{{ t.cta1 }}</button>
+            <a href="#cases" style="border:1px solid rgba(255,255,255,.45);border-radius:4px;color:#FFFFFF;padding:15px 24px;font-weight:600;font-size:16px;transition:background .2s,border-color .2s;" style-hover="background:rgba(255,255,255,.08);border-color:#FFFFFF;color:#FFFFFF;">{{ t.cta2 }}</a>
+          </div>
+        </div>
+        <div data-hin="" style="padding:clamp(8px,2vw,24px) 0;">
+          <svg data-herologo="" viewBox="52 22 1082 379" style="width:100%;height:auto;display:block;overflow:visible;shape-rendering:crispEdges;">
+            <g opacity=".38" fill="#FFFFFF">
+              <rect data-l="" x="208" y="171" width="908" height="5"></rect><rect data-l="" x="70" y="240" width="286" height="5"></rect><rect data-l="" x="495" y="240" width="621" height="5"></rect><rect data-l="" x="70" y="309" width="1046" height="5"></rect><rect data-l="" x="70" y="377" width="1046" height="5"></rect>
+              <rect data-l="" x="208" y="170" width="6" height="26"></rect><rect data-l="" x="422" y="264" width="4" height="119"></rect><rect data-l="" x="636" y="138" width="5" height="245"></rect><rect data-l="" x="708" y="140" width="5" height="243"></rect><rect data-l="" x="921" y="142" width="5" height="241"></rect><rect data-l="" x="993" y="170" width="7" height="213"></rect><rect data-l="" x="1063" y="138" width="5" height="38"></rect>
+              <rect data-b="" x="207" y="308" width="74" height="75"></rect><rect data-b="" x="138" y="245" width="77" height="63"></rect><rect data-b="" x="921" y="245" width="79" height="63"></rect><rect data-b="" x="993" y="170" width="73" height="75"></rect>
+            </g>
+            <g fill="#FFFFFF">
+              <rect data-t="" x="281" y="40" width="75" height="343"></rect><rect data-t="" x="495" y="40" width="74" height="343"></rect><rect data-t="" x="281" y="171" width="360" height="65"></rect><rect data-t="" x="569" y="171" width="72" height="74"></rect><rect data-t="" x="495" y="40" width="74" height="64"></rect><rect data-t="" x="569" y="66" width="72" height="38"></rect><rect data-t="" x="601" y="40" width="40" height="26"></rect><rect data-t="" x="676" y="40" width="284" height="61"></rect><rect data-t="" x="779" y="40" width="77" height="343"></rect>
+            </g>
+            <g fill="#123E6B"><rect x="603" y="72" width="26" height="26"></rect><rect x="144" y="247" width="27" height="24"></rect><rect x="179" y="281" width="29" height="27"></rect><rect x="1001" y="177" width="23" height="25"></rect><rect x="1033" y="211" width="26" height="25"></rect></g>
+          </svg>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));border-top:1px solid rgba(255,255,255,.2);">
+        <div data-reveal="0" style="padding:32px 24px 40px 0;display:flex;flex-direction:column;gap:8px;">
+          <b style="font-size:clamp(36px,3.4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:1;"><span data-count="120" data-suf="+">120+</span></b>
+          <span style="font-size:15px;color:#C4D6EA;">{{ t.m1 }}</span>
+        </div>
+        <div data-reveal="80" style="padding:32px 24px 40px;border-left:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:8px;">
+          <b style="font-size:clamp(36px,3.4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:1;"><span data-count="45" data-suf="+">45+</span></b>
+          <span style="font-size:15px;color:#C4D6EA;">{{ t.m2 }}</span>
+        </div>
+        <div data-reveal="160" style="padding:32px 24px 40px;border-left:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:8px;">
+          <b style="font-size:clamp(36px,3.4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:1;"><span data-count="99.9" data-dec="1" data-suf="%">99.9%</span></b>
+          <span style="font-size:15px;color:#C4D6EA;">{{ t.m3 }}</span>
+        </div>
+        <div data-reveal="240" style="padding:32px 0 40px 24px;border-left:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:8px;">
+          <b style="font-size:clamp(36px,3.4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:1;">24/7</b>
+          <span style="font-size:15px;color:#C4D6EA;">{{ t.m4 }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom:1px solid #E6E9ED;">
+    <div style="max-width:1320px;margin:0 auto;padding:48px clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:28px;">
+      <div data-reveal="" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+        <span style="font-size:14px;font-weight:600;color:#44505E;">{{ t.trust }}</span>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <sc-for list="{{ certs }}" as="c" hint-placeholder-count="3">
+            <span style="border:1px solid #D5DAE0;border-radius:4px;padding:7px 12px;font-size:13px;font-weight:600;color:#123E6B;">{{ c }}</span>
+          </sc-for>
+        </div>
+      </div>
+      <div data-reveal="80" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:#E6E9ED;border:1px solid #E6E9ED;">
+        <sc-for list="{{ logos }}" as="lg" hint-placeholder-count="6">
+          <div style="background:#FFFFFF;height:88px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;letter-spacing:.06em;color:#8A94A0;">{{ lg }}</div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" style="background:#F3F5F7;">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,12vh,128px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(40px,6vw,96px);align-items:start;">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;position:sticky;top:120px;">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3575B7;">{{ t.sEy }}</span>
+        <h2 style="margin:0;font-size:clamp(30px,3vw,44px);font-weight:700;letter-spacing:-.025em;line-height:1.15;text-wrap:balance;">{{ t.sTitle }}</h2>
+        <p style="margin:0;font-size:17px;line-height:1.6;color:#44505E;max-width:420px;">{{ t.sSub }}</p>
+        <button onClick="{{ openRfp }}" style="align-self:flex-start;margin-top:8px;background:transparent;color:#123E6B;border:1px solid #123E6B;border-radius:4px;padding:13px 20px;font-weight:600;font-size:15px;cursor:pointer;transition:background .2s,color .2s;" style-hover="background:#123E6B;color:#FFFFFF;">{{ t.cta1 }}</button>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #D5DAE0;">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="5">
+          <div data-reveal="{{ s.delay }}" onClick="{{ s.pick }}" style="border-bottom:1px solid #D5DAE0;padding:32px 24px;margin:0 -24px;display:grid;grid-template-columns:48px minmax(0,1fr) 24px;gap:20px;cursor:pointer;transition:background .3s;" style-hover="background:#FFFFFF;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#3575B7;padding-top:6px;">{{ s.no }}</span>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <h3 style="margin:0;font-size:22px;font-weight:700;letter-spacing:-.015em;line-height:1.25;">{{ s.title }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.6;color:#44505E;text-wrap:pretty;">{{ s.text }}</p>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:4px;">
+                <sc-for list="{{ s.tags }}" as="tg" hint-placeholder-count="3">
+                  <span style="font-size:12px;font-weight:600;color:#123E6B;background:#E3ECF6;border-radius:3px;padding:4px 8px;">{{ tg }}</span>
+                </sc-for>
+              </div>
+            </div>
+            <span style="color:#123E6B;font-size:18px;padding-top:4px;">→</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="cases" data-case="" style="position:relative;height:300vh;background:#FFFFFF;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;padding-top:72px;">
+      <div style="max-width:1320px;width:100%;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,6vw,96px);align-items:center;">
+        <div style="display:flex;flex-direction:column;gap:24px;">
+          <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3575B7;">{{ t.cEy }}</span>
+          <h2 style="margin:0;font-size:clamp(30px,3vw,44px);font-weight:700;letter-spacing:-.025em;line-height:1.15;">{{ t.cTitle }}</h2>
+          <div style="display:flex;gap:20px;padding-top:8px;">
+            <div style="width:2px;background:#E6E9ED;position:relative;"><div data-casebar="" style="position:absolute;inset:0;background:#123E6B;transform-origin:50% 0;transform:scaleY(0);"></div></div>
+            <div style="display:flex;flex-direction:column;flex:1;">
+              <sc-for list="{{ caseSteps }}" as="c" hint-placeholder-count="4">
+                <button onClick="{{ c.go }}" style="background:transparent;border:0;color:{{ c.fg }};padding:14px 0;display:flex;gap:16px;align-items:baseline;cursor:pointer;text-align:left;transition:color .3s;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">{{ c.no }}</span>
+                  <span style="font-size:19px;font-weight:700;">{{ c.k }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div data-casepanel="" style="background:#123E6B;color:#FFFFFF;border-radius:6px;padding:clamp(28px,3.5vw,48px);min-height:420px;display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;letter-spacing:.06em;color:#9DBCE0;"><span>{{ cs.label }}</span><span>{{ cs.count }}</span></div>
+          <h3 style="margin:0;font-size:clamp(24px,2.3vw,34px);font-weight:700;letter-spacing:-.02em;line-height:1.2;text-wrap:balance;">{{ cs.title }}</h3>
+          <p style="margin:0;font-size:17px;line-height:1.65;color:#C4D6EA;text-wrap:pretty;">{{ cs.text }}</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <sc-for list="{{ cs.chips }}" as="ch" hint-placeholder-count="0">
+              <span style="font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,.35);border-radius:3px;padding:6px 10px;">{{ ch }}</span>
+            </sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:24px;margin-top:auto;">
+            <sc-for list="{{ cs.stats }}" as="st" hint-placeholder-count="0">
+              <div style="border-top:1px solid rgba(255,255,255,.25);padding-top:16px;display:flex;flex-direction:column;gap:6px;">
+                <b style="font-size:clamp(32px,3vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1;">{{ st.v }}</b>
+                <span style="font-size:14px;color:#C4D6EA;line-height:1.45;">{{ st.l }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calc" style="background:#F3F5F7;">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,12vh,128px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:48px;">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:16px;max-width:760px;">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3575B7;">{{ t.kEy }}</span>
+        <h2 style="margin:0;font-size:clamp(30px,3vw,44px);font-weight:700;letter-spacing:-.025em;line-height:1.15;">{{ t.kTitle }}</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start;">
+        <div data-reveal="" style="background:#FFFFFF;border:1px solid #E6E9ED;border-radius:6px;display:flex;flex-direction:column;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid #E6E9ED;">
+            <sc-for list="{{ calcTabs }}" as="tb" hint-placeholder-count="3">
+              <button onClick="{{ tb.go }}" style="background:transparent;color:{{ tb.fg }};border:0;border-bottom:2px solid {{ tb.line }};padding:18px 20px;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:baseline;font-weight:600;font-size:15px;transition:color .2s;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">{{ tb.no }}</span>{{ tb.label }}
+              </button>
+            </sc-for>
+          </div>
+          <div data-calcbody="" style="padding:clamp(20px,2.5vw,32px);display:flex;flex-direction:column;gap:10px;min-height:440px;">
+            <sc-if value="{{ s0 }}" hint-placeholder-val="{{ true }}">
+              <sc-for list="{{ calcTypes }}" as="o" hint-placeholder-count="5">
+                <button onClick="{{ o.pick }}" style="background:{{ o.bg }};color:#0F1B2B;border:1px solid {{ o.bd }};border-radius:4px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;text-align:left;font-weight:600;font-size:16px;transition:background .2s,border-color .2s;">
+                  <span style="display:flex;gap:14px;align-items:center;"><i style="width:16px;height:16px;border-radius:50%;border:{{ o.ring }};flex:none;"></i>{{ o.n }}</span><span style="font-size:14px;font-weight:500;color:#44505E;">{{ o.meta }}</span>
+                </button>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ calcMods }}" as="o" hint-placeholder-count="6">
+                <button onClick="{{ o.pick }}" style="background:{{ o.bg }};color:#0F1B2B;border:1px solid {{ o.bd }};border-radius:4px;padding:15px 18px;display:flex;gap:14px;align-items:center;cursor:pointer;text-align:left;font-weight:600;font-size:15px;transition:background .2s,border-color .2s;">
+                  <i style="width:16px;height:16px;border-radius:3px;background:{{ o.box }};border:1px solid #123E6B;flex:none;color:#FFFFFF;font-size:11px;font-style:normal;line-height:14px;text-align:center;">{{ o.mark }}</i><span>{{ o.n }}</span>
+                </button>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ calcSpeed }}" as="o" hint-placeholder-count="2">
+                <button onClick="{{ o.pick }}" style="background:{{ o.bg }};color:#0F1B2B;border:1px solid {{ o.bd }};border-radius:4px;padding:20px 18px;display:flex;gap:14px;cursor:pointer;text-align:left;transition:background .2s,border-color .2s;">
+                  <i style="width:16px;height:16px;border-radius:50%;border:{{ o.ring }};flex:none;margin-top:3px;"></i>
+                  <span style="display:flex;flex-direction:column;gap:4px;"><span style="font-weight:700;font-size:17px;">{{ o.n }}</span><span style="font-size:14px;color:#44505E;">{{ o.d }}</span></span>
+                </button>
+              </sc-for>
+            </sc-if>
+            <div style="display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:20px;">
+              <button onClick="{{ calcPrev }}" style="background:transparent;color:#44505E;border:1px solid #D5DAE0;border-radius:4px;padding:13px 20px;cursor:pointer;font-weight:600;">{{ t.back }}</button>
+              <button onClick="{{ calcNext }}" style="background:#123E6B;color:#FFFFFF;border:0;border-radius:4px;padding:13px 22px;cursor:pointer;font-weight:600;transition:background .2s;" style-hover="background:#0D2F52;">{{ nextLabel }}</button>
+            </div>
+          </div>
+        </div>
+        <div data-reveal="100" style="background:#123E6B;color:#FFFFFF;border-radius:6px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:22px;position:sticky;top:104px;">
+          <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9DBCE0;">{{ t.estLabel }}</span>
+          <b data-est="" style="font-size:clamp(34px,3.4vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1.05;">{{ est.range }}</b>
+          <div style="display:flex;gap:28px;font-size:15px;border-top:1px solid rgba(255,255,255,.2);padding-top:18px;flex-wrap:wrap;color:#C4D6EA;">
+            <span>≈ {{ est.weeks }} {{ t.weeks }}</span><span>{{ est.modCount }} modul</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;color:#C4D6EA;">
+            <b style="font-size:17px;color:#FFFFFF;">{{ est.type }}</b>
+            <sc-for list="{{ est.mods }}" as="m" hint-placeholder-count="2">
+              <span>— {{ m }}</span>
+            </sc-for>
+          </div>
+          <button onClick="{{ openRfp }}" style="background:#FFFFFF;color:#123E6B;border:0;border-radius:4px;padding:16px 22px;font-weight:600;font-size:16px;cursor:pointer;transition:background .2s;" style-hover="background:#E3ECF6;">{{ t.pdf }}</button>
+          <span style="font-size:13px;line-height:1.55;color:#9DBCE0;">{{ t.estNote }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" style="background:#FFFFFF;">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,12vh,128px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:56px;">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:16px;max-width:760px;">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3575B7;">{{ t.pEy }}</span>
+        <h2 style="margin:0;font-size:clamp(30px,3vw,44px);font-weight:700;letter-spacing:-.025em;line-height:1.15;">{{ t.pTitle }}</h2>
+      </div>
+      <div data-proc="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:32px 24px;">
+        <sc-for list="{{ stages }}" as="p" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="height:2px;background:#E6E9ED;position:relative;"><div data-seg="" style="position:absolute;inset:0;background:#123E6B;transform-origin:0 50%;transform:scaleX(0);"></div></div>
+            <span style="font-size:13px;font-weight:600;color:#3575B7;padding-top:8px;">{{ p.no }} · {{ p.time }}</span>
+            <h3 style="margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.3;">{{ p.title }}</h3>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:#44505E;text-wrap:pretty;">{{ p.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" style="background:#123E6B;color:#FFFFFF;">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,12vh,128px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:64px;">
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:end;">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9DBCE0;">{{ t.fEy }}</span>
+          <h2 style="margin:0;font-size:clamp(32px,3.6vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1.1;text-wrap:balance;">{{ t.fTitle }}</h2>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start;">
+          <button onClick="{{ openRfp }}" style="background:#FFFFFF;color:#123E6B;border:0;border-radius:4px;padding:16px 24px;font-weight:600;font-size:16px;cursor:pointer;" style-hover="background:#E3ECF6;">{{ t.cta1 }}</button>
+          <a href="mailto:info@heaventech.uz" style="border:1px solid rgba(255,255,255,.45);border-radius:4px;color:#FFFFFF;padding:15px 24px;font-weight:600;font-size:16px;" style-hover="border-color:#FFFFFF;color:#FFFFFF;">info@heaventech.uz</a>
+        </div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:40px;border-top:1px solid rgba(255,255,255,.2);padding-top:48px;">
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;color:#C4D6EA;">
+          <b style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#FFFFFF;margin-bottom:6px;">{{ t.phone }}</b>
+          <span>+998 (__) ___-__-__</span><span>info@heaventech.uz</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;color:#C4D6EA;">
+          <b style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#FFFFFF;margin-bottom:6px;">{{ t.addr }}</b>
+          <span style="line-height:1.55;">Toshkent sh., [korporativ manzil]</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;color:#C4D6EA;">
+          <b style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#FFFFFF;margin-bottom:6px;">{{ t.req }}</b>
+          <span>STIR: ___ ___ ___</span><span>MFO: _____</span><span>H/r: ____ ____ ____ ____</span>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,.2);border-radius:4px;min-height:150px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#9DBCE0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:16px 16px;">Yandex / Google Maps</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#9DBCE0;border-top:1px solid rgba(255,255,255,.2);padding:28px 0;">
+        <span>© 2026 HeavenTech. {{ t.rights }}</span>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+          <sc-for list="{{ t.nav }}" as="n" hint-placeholder-count="6"><a href="{{ n.href }}" style="color:#C4D6EA;" style-hover="color:#FFFFFF;">{{ n.label }}</a></sc-for>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ rfp }}" hint-placeholder-val="{{ false }}">
+    <div data-overlay="" onClick="{{ closeRfp }}" style="position:fixed;inset:0;z-index:150;background:rgba(15,27,43,.6);display:flex;align-items:center;justify-content:center;padding:20px;">
+      <div data-modal="" onClick="{{ stop }}" style="background:#FFFFFF;color:#0F1B2B;border-radius:6px;width:100%;max-width:580px;max-height:92vh;overflow:auto;padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3575B7;">RFP</span>
+          <button onClick="{{ closeRfp }}" style="background:transparent;border:1px solid #D5DAE0;border-radius:4px;color:#44505E;width:36px;height:36px;cursor:pointer;font-size:15px;">✕</button>
+        </div>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submitRfp }}" style="display:flex;flex-direction:column;gap:14px;">
+            <h3 style="margin:0 0 4px;font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.2;">{{ t.rfpTitle }}</h3>
+            <input required="" placeholder="{{ t.fName }}" style="border:1px solid #D5DAE0;border-radius:4px;padding:14px 16px;font-size:16px;color:#0F1B2B;outline-color:#3575B7;">
+            <input placeholder="{{ t.fCompany }}" style="border:1px solid #D5DAE0;border-radius:4px;padding:14px 16px;font-size:16px;color:#0F1B2B;outline-color:#3575B7;">
+            <input required="" type="email" placeholder="E-mail" style="border:1px solid #D5DAE0;border-radius:4px;padding:14px 16px;font-size:16px;color:#0F1B2B;outline-color:#3575B7;">
+            <textarea rows="3" placeholder="{{ t.fMsg }}" style="border:1px solid #D5DAE0;border-radius:4px;padding:14px 16px;font-size:16px;color:#0F1B2B;resize:vertical;outline-color:#3575B7;"></textarea>
+            <div style="font-size:14px;background:#F3F5F7;border-radius:4px;padding:12px 14px;line-height:1.6;color:#44505E;">{{ est.type }} · {{ est.range }} · ≈ {{ est.weeks }} {{ t.weeks }}</div>
+            <button type="submit" style="background:#123E6B;color:#FFFFFF;border:0;border-radius:4px;padding:16px 22px;font-weight:600;font-size:16px;cursor:pointer;margin-top:4px;" style-hover="background:#0D2F52;">{{ t.send }}</button>
+          </form>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:12px;padding:20px 0;">
+            <h3 style="margin:0;font-size:28px;font-weight:700;letter-spacing:-.02em;">{{ t.thanks }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#44505E;">{{ t.thanksSub }}</p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Animatsiya&quot;}}">
+class Component extends DCLogic {
+  state = { lang: 'uz', narrow: false, caseStep: 0, calcStep: 0, calcType: 0, calcMods: [0, 1], calcRush: 0, rfp: false, sent: false };
+  rootRef = React.createRef();
+  ease = 'cubic-bezier(.22,1,.36,1)';
+
+  D = {
+    uz: { nav: [['Kompaniya', '#top'], ['Xizmatlar', '#services'], ['Loyihalar', '#cases'], ['Kalkulyator', '#calc'], ['Bosqichlar', '#process'], ['Aloqa', '#contact']],
+      kicker: 'IT-kompaniya · Toshkent', words: ['HeavenTech', '—', 'Raqamli', 'transformatsiya', 'va', 'kompleks', 'dasturiy', 'yechimlar'],
+      sub: 'B2B va Enterprise bizneslar uchun yuqori unumdorlikka ega tizimlar.', cta1: 'Loyiha muhokamasi', cta2: "Case Study'larni ko'rish",
+      m1: 'Yakunlangan loyihalar', m2: 'Xalqaro va mahalliy B2B mijozlar', m3: 'Tizimlar barqarorligi (Uptime)', m4: "Texnik qo'llab-quvvatlash",
+      trust: 'Mijozlar va hamkorlar', sEy: 'Xizmatlar', sTitle: "To'liq siklli dasturiy ishlab chiqish", sSub: "Biznes jarayonlari tahlilidan tortib ishga tushirish va qo'llab-quvvatlashgacha.",
+      cEy: 'Case study', cTitle: 'Muammo, yechim, texnologiyalar va natija', kEy: 'Loyiha kalkulyatori', kTitle: "Loyiha turini tanlang va dastlabki bahoni ko'ring",
+      tabs: ['Loyiha turi', 'Modullar', 'Muddat'], back: 'Orqaga', next: 'Keyingi', done: 'Ariza yuborish', estLabel: 'Dastlabki baho', weeks: 'hafta', pdf: "PDF-smeta so'rash",
+      estNote: 'Taxminiy hisob. Aniq narx texnik topshiriq tahlilidan keyin belgilanadi.', pEy: 'Ish bosqichlari', pTitle: "Discovery'dan production'gacha 10 hafta",
+      fEy: 'Aloqa', fTitle: 'Loyihangizni muhokama qilishga tayyormiz', phone: 'Aloqa', addr: 'Manzil', req: 'Rekvizitlar', rights: 'Barcha huquqlar himoyalangan.',
+      rfpTitle: 'Loyihangiz haqida qisqacha', fName: 'Ism familiya', fCompany: 'Kompaniya', fMsg: 'Loyiha tavsifi', send: 'Yuborish', thanks: 'Arizangiz qabul qilindi', thanksSub: "Mas'ul menejer bir ish kuni ichida siz bilan bog'lanadi." },
+    ru: { nav: [['Компания', '#top'], ['Услуги', '#services'], ['Проекты', '#cases'], ['Калькулятор', '#calc'], ['Этапы', '#process'], ['Контакты', '#contact']],
+      kicker: 'IT-компания · Ташкент', words: ['HeavenTech', '—', 'цифровая', 'трансформация', 'и', 'комплексные', 'программные', 'решения'],
+      sub: 'Высокопроизводительные системы для B2B и Enterprise-бизнеса.', cta1: 'Обсудить проект', cta2: 'Смотреть кейсы',
+      m1: 'Завершённых проектов', m2: 'Международных и локальных B2B-клиентов', m3: 'Стабильность систем (Uptime)', m4: 'Техническая поддержка',
+      trust: 'Клиенты и партнёры', sEy: 'Услуги', sTitle: 'Разработка программного обеспечения полного цикла', sSub: 'От анализа бизнес-процессов до запуска и сопровождения.',
+      cEy: 'Кейс', cTitle: 'Проблема, решение, технологии и результат', kEy: 'Калькулятор проекта', kTitle: 'Выберите тип проекта и получите предварительную оценку',
+      tabs: ['Тип проекта', 'Модули', 'Сроки'], back: 'Назад', next: 'Далее', done: 'Отправить заявку', estLabel: 'Предварительная оценка', weeks: 'нед.', pdf: 'Запросить PDF-смету',
+      estNote: 'Ориентировочный расчёт. Точная стоимость определяется после анализа ТЗ.', pEy: 'Этапы работы', pTitle: 'От discovery до production за 10 недель',
+      fEy: 'Контакты', fTitle: 'Готовы обсудить ваш проект', phone: 'Связь', addr: 'Адрес', req: 'Реквизиты', rights: 'Все права защищены.',
+      rfpTitle: 'Коротко о проекте', fName: 'Имя и фамилия', fCompany: 'Компания', fMsg: 'Описание проекта', send: 'Отправить', thanks: 'Заявка принята', thanksSub: 'Менеджер свяжется с вами в течение рабочего дня.' },
+    en: { nav: [['Company', '#top'], ['Services', '#services'], ['Projects', '#cases'], ['Calculator', '#calc'], ['Process', '#process'], ['Contact', '#contact']],
+      kicker: 'IT company · Tashkent', words: ['HeavenTech', '—', 'digital', 'transformation', 'and', 'end-to-end', 'software', 'solutions'],
+      sub: 'High-performance systems for B2B and enterprise businesses.', cta1: 'Discuss a project', cta2: 'View case studies',
+      m1: 'Projects delivered', m2: 'International and local B2B clients', m3: 'System stability (Uptime)', m4: 'Technical support',
+      trust: 'Clients and partners', sEy: 'Services', sTitle: 'Full-cycle software development', sSub: 'From business process analysis to launch and ongoing support.',
+      cEy: 'Case study', cTitle: 'Challenge, solution, technology and result', kEy: 'Project calculator', kTitle: 'Pick a project type and see a preliminary estimate',
+      tabs: ['Project type', 'Modules', 'Timeline'], back: 'Back', next: 'Next', done: 'Send request', estLabel: 'Preliminary estimate', weeks: 'weeks', pdf: 'Request PDF estimate',
+      estNote: 'Indicative figure. Final pricing follows a review of the specification.', pEy: 'Process', pTitle: 'From discovery to production in 10 weeks',
+      fEy: 'Contact', fTitle: 'Ready to discuss your project', phone: 'Contact', addr: 'Address', req: 'Legal details', rights: 'All rights reserved.',
+      rfpTitle: 'Tell us about your project', fName: 'Full name', fCompany: 'Company', fMsg: 'Project description', send: 'Send', thanks: 'Request received', thanksSub: 'A manager will contact you within one business day.' }
+  };
+
+  SERV = [
+    { title: 'Enterprise CRM & ERP Tizimlari', text: "Savdo, ombor, moliya va HR jarayonlarini yagona tizimga birlashtiruvchi korporativ platformalar.", tags: ['NestJS', 'PostgreSQL', 'Redis'] },
+    { title: 'Telegram Mini Apps & Ekotizimlar', text: "Telegram ichida ishlaydigan do'kon, bron va xizmat ilovalari: bot, to'lov va CRM integratsiyasi bilan.", tags: ['TWA SDK', 'React', 'Go'] },
+    { title: 'Custom Software & SaaS Platformalar', text: "Biznes modelingizga moslab yoziladigan, ko'p ijarachili (multi-tenant) SaaS platformalar.", tags: ['Next.js', 'TypeScript', 'FastAPI'] },
+    { title: 'Mobil Dasturlash (iOS & Android)', text: "Native va kross-platforma ilovalar: dizayndan App Store va Google Play'gacha.", tags: ['Swift', 'Kotlin', 'Flutter'] },
+    { title: 'Cloud, DevOps & IT-Konsalting', text: "Infratuzilma auditi, CI/CD, konteynerlashtirish va arxitektura bo'yicha maslahat.", tags: ['Docker', 'Nginx', 'GitHub Actions'] }
+  ];
+  TYPES = [{ n: 'Enterprise CRM / ERP', base: 14000, w: 12 }, { n: 'Telegram Mini App', base: 4500, w: 5 }, { n: 'Custom Software / SaaS', base: 18000, w: 14 }, { n: 'Mobil ilova (iOS & Android)', base: 12000, w: 10 }, { n: 'Cloud & DevOps', base: 3500, w: 4 }];
+  MODS = [{ n: 'Admin panel (RBAC)', p: 2000, w: 1 }, { n: "To'lov tizimlari (Payme, Click, Uzum)", p: 1500, w: 1 }, { n: 'CRM / Telegram bot integratsiyasi', p: 1800, w: 1 }, { n: "Ko'p tillilik (UZ / RU / EN)", p: 900, w: 0.5 }, { n: 'Analitika dashboard', p: 2500, w: 1.5 }, { n: 'PDF hisobotlar va eksport', p: 1200, w: 1 }];
+  SPEED = [{ n: 'Standart', d: 'Rejali ish tartibi, bitta jamoa' }, { n: 'Tezlashtirilgan', d: '+30% byudjet, muddat 25% qisqaradi' }];
+  CASE = [
+    { k: 'Muammo', en: 'CHALLENGE', title: "Buyurtmalar Excel va Telegram guruhlarida yo'qolardi", text: "Namuna: 12 filialli distribyutor kompaniya. Buyurtmalar, ombor qoldiqlari va yetkazib berish uch xil joyda yuritilar, bitta buyurtmani qayta ishlash o'rtacha 4 soat olardi." },
+    { k: 'Yechim', en: 'SOLUTION', title: 'Yagona ERP va Telegram Mini App', text: "Filiallar, ombor va kuryerlarni bitta tizimga birlashtirdik. Mijozlar buyurtmani Telegram ichida beradi, ombor real vaqtda yangilanadi, rahbariyat har kuni avtomatik hisobot oladi." },
+    { k: 'Texnologiyalar', en: 'STACK', title: 'Ishlatilgan texnologiyalar', text: 'Mikroservis arxitekturasi, keshlash va avtomatik deploy bilan.', chips: ['NestJS', 'PostgreSQL', 'Redis', 'Next.js', 'Telegram WebApp SDK', 'Docker', 'GitHub Actions', 'Cloudflare'] },
+    { k: 'Natija', en: 'BUSINESS ROI', title: 'Biznes uchun ROI', text: "Tizim ishga tushganidan 3 oy o'tib olingan ko'rsatkichlar.", stats: [{ v: '−88%', l: 'buyurtmani qayta ishlash vaqti' }, { v: '70%', l: 'jarayonlar avtomatlashtirildi' }, { v: '−32%', l: 'operatsion xarajatlar' }] }
+  ];
+  STAGES = [
+    { title: 'Discovery & Design System', text: 'Prototiplash, UX/UI dizayn, UI-Kit va Figma loyihasi', time: '2 hafta' },
+    { title: 'Frontend & SSR Development', text: 'Sahifalarni adaptive va SSR rejimida dasturlash', time: '3 hafta' },
+    { title: 'Backend & CMS Integration', text: 'API, CMS admin panel, integratsiyalar va kalkulyator', time: '3 hafta' },
+    { title: 'QA & Security Testing', text: 'Funksional, tezlik va xavfsizlik testlari', time: '1 hafta' },
+    { title: 'Production Launch', text: 'Serverga joylash, DNS sozlamalari va SEO indeksatsiya', time: '1 hafta' }
+  ];
+
+  $ = s => this.rootRef.current ? this.rootRef.current.querySelector(s) : null;
+  $$ = s => this.rootRef.current ? Array.from(this.rootRef.current.querySelectorAll(s)) : [];
+
+  componentDidMount() {
+    if (!this.rootRef.current) return;
+    this.reduced = this.props.motion === false || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.onResize(); window.addEventListener('resize', this.onResize);
+    this.heroIn(); this.initReveal();
+    document.addEventListener('scroll', this.onScroll, true);
+    this.scrollUpdate();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    document.removeEventListener('scroll', this.onScroll, true);
+    if (this.io) this.io.disconnect();
+  }
+  componentDidUpdate(pp, ps) {
+    const s = this.state;
+    if (this.reduced) return;
+    if (ps.lang !== s.lang) this.wordsIn(0);
+    if (ps.caseStep !== s.caseStep) { const p = this.$('[data-casepanel]'); p && Array.from(p.children).slice(1).forEach((c, i) => c.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: i * 50, easing: this.ease, fill: 'backwards' })); }
+    if (ps.calcStep !== s.calcStep) { const b = this.$('[data-calcbody]'); b && b.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: this.ease }); }
+    if (ps.calcType !== s.calcType || ps.calcMods !== s.calcMods || ps.calcRush !== s.calcRush) { const e = this.$('[data-est]'); e && e.animate([{ opacity: .35 }, { opacity: 1 }], { duration: 400, easing: this.ease }); }
+    if (s.rfp && !ps.rfp) { const o = this.$('[data-overlay]'), m = this.$('[data-modal]'); o && o.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250 }); m && m.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: this.ease }); }
+  }
+
+  onResize = () => { const n = window.innerWidth < 1080; if (n !== this.state.narrow) this.setState({ narrow: n }); };
+
+  wordsIn(d) { this.$$('[data-word]').forEach((w, i) => w.animate([{ transform: 'translateY(100%)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 900, delay: d + i * 45, easing: this.ease, fill: 'backwards' })); }
+  heroIn() {
+    if (this.reduced) return;
+    this.wordsIn(150);
+    this.$$('[data-hin]').forEach((e, i) => e.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 900, delay: 100 + i * 120, easing: this.ease, fill: 'backwards' }));
+    const svg = this.$('[data-herologo]'); if (!svg) return;
+    svg.querySelectorAll('[data-l]').forEach((r, i) => {
+      const hz = +r.getAttribute('width') > +r.getAttribute('height');
+      r.style.transformBox = 'fill-box'; r.style.transformOrigin = hz ? '0 50%' : '50% 100%';
+      r.animate([{ transform: hz ? 'scaleX(0)' : 'scaleY(0)' }, { transform: 'none' }], { duration: 1200, delay: 400 + i * 40, easing: this.ease, fill: 'backwards' });
+    });
+    svg.querySelectorAll('[data-b]').forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, delay: 1000 + i * 90, easing: this.ease, fill: 'backwards' }));
+    svg.querySelectorAll('[data-t]').forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 900, delay: 700 + i * 40, easing: this.ease, fill: 'backwards' }));
+  }
+
+  initReveal() {
+    if (this.reduced) return;
+    const els = this.$$('[data-reveal]');
+    els.forEach(e => { e.style.opacity = '0'; e.style.transform = 'translateY(24px)'; });
+    this.io = new IntersectionObserver(en => en.forEach(x => {
+      if (!x.isIntersecting) return;
+      const e = x.target; this.io.unobserve(e);
+      e.style.opacity = ''; e.style.transform = '';
+      const d = +(e.dataset.reveal || 0);
+      e.animate([{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 900, delay: d, easing: this.ease, fill: 'backwards' });
+      e.querySelectorAll('[data-count]').forEach(c => this.count(c, d));
+    }), { threshold: 0.15 });
+    els.forEach(e => this.io.observe(e));
+  }
+  count(e, delay) {
+    const to = parseFloat(e.dataset.count), dec = +(e.dataset.dec || 0), suf = e.dataset.suf || '';
+    e.textContent = (0).toFixed(dec) + suf;
+    setTimeout(() => { const t0 = performance.now(); const f = now => { const p = Math.min(1, (now - t0) / 1600); e.textContent = (to * (1 - Math.pow(1 - p, 3))).toFixed(dec) + suf; if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }, delay + 100);
+  }
+
+  onScroll = () => { if (this.tick) return; this.tick = requestAnimationFrame(() => { this.tick = null; this.scrollUpdate(); }); };
+  scrollUpdate() {
+    const root = this.rootRef.current; if (!root) return;
+    const H = innerHeight, y = -root.getBoundingClientRect().top, cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+    const nav = this.$('[data-nav]'); nav && (nav.style.boxShadow = y > 8 ? '0 4px 20px rgba(15,27,43,.06)' : 'none');
+    const cs = this.$('[data-case]');
+    if (cs) {
+      const r = cs.getBoundingClientRect(), p = cl(-r.top / (r.height - H));
+      const cb = this.$('[data-casebar]'); cb && (cb.style.transform = `scaleY(${p})`);
+      const st = Math.min(3, Math.floor(p * 4)); if (st !== this.state.caseStep) this.setState({ caseStep: st });
+    }
+    const pr = this.$('[data-proc]');
+    if (pr) {
+      const r = pr.getBoundingClientRect(), p = cl((H * .85 - r.top) / (r.height + H * .3)) * 5;
+      this.$$('[data-seg]').forEach((s, i) => s.style.transform = `scaleX(${cl(p - i)})`);
+    }
+  }
+
+  goCase(i) {
+    const cs = this.$('[data-case]'); if (!cs) return;
+    const r = cs.getBoundingClientRect(), span = r.height - innerHeight;
+    window.scrollBy({ top: r.top + span * ((i + .5) / 4), behavior: 'smooth' });
+  }
+  fmt(n) { return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+  renderVals() {
+    const s = this.state, t0 = this.D[s.lang] || this.D.uz;
+    const t = { ...t0, nav: t0.nav.map(([label, href]) => ({ label, href })) };
+    const opt = v => ({ bg: v ? '#EEF3F9' : '#FFFFFF', bd: v ? '#123E6B' : '#D5DAE0', ring: v ? '5px solid #123E6B' : '1px solid #9AA4B0' });
+    const ty = this.TYPES[s.calcType], mods = s.calcMods.map(i => this.MODS[i]), rush = s.calcRush === 1;
+    const total = (ty.base + mods.reduce((a, m) => a + m.p, 0)) * (rush ? 1.3 : 1);
+    const weeks = Math.ceil((ty.w + mods.reduce((a, m) => a + m.w, 0)) * (rush ? .75 : 1));
+    const r100 = v => Math.round(v / 100) * 100;
+    const est = { range: this.fmt(r100(total * .85)) + ' – ' + this.fmt(r100(total * 1.2)), weeks, type: ty.n + (rush ? ' · ' + this.SPEED[1].n : ''), mods: mods.map(m => m.n), modCount: mods.length };
+    const c = this.CASE[s.caseStep];
+    return {
+      rootRef: this.rootRef, t, wide: !s.narrow,
+      langs: ['uz', 'ru', 'en'].map(code => ({ code: code.toUpperCase(), fg: code === s.lang ? '#123E6B' : '#8A94A0', line: code === s.lang ? '#123E6B' : 'transparent', pick: () => this.setState({ lang: code }) })),
+      openRfp: () => this.setState({ rfp: true, sent: false }), closeRfp: () => this.setState({ rfp: false }), stop: e => e.stopPropagation(),
+      submitRfp: e => { e.preventDefault(); this.setState({ sent: true }); }, rfp: s.rfp, sent: s.sent, notSent: !s.sent,
+      certs: ['IT Park rezidenti', 'ISO/IEC 27001', 'ISO 9001'],
+      logos: Array.from({ length: 6 }, (_, i) => 'HAMKOR LOGOTIPI ' + (i + 1)),
+      services: this.SERV.map((v, i) => ({ ...v, no: String(i + 1).padStart(2, '0'), delay: i * 60, pick: () => { this.setState({ calcType: i, calcStep: 1 }); const k = this.$('#calc'); k && window.scrollBy({ top: k.getBoundingClientRect().top - 72, behavior: 'smooth' }); } })),
+      caseSteps: this.CASE.map((v, i) => ({ k: v.k, no: '0' + (i + 1), fg: i === s.caseStep ? '#123E6B' : '#9AA4B0', go: () => this.goCase(i) })),
+      cs: { label: 'Namuna · ' + c.en, count: '0' + (s.caseStep + 1) + ' / 04', title: c.title, text: c.text, chips: c.chips || [], stats: c.stats || [] },
+      calcTabs: t.tabs.map((label, i) => ({ label, no: '0' + (i + 1), fg: i === s.calcStep ? '#123E6B' : '#8A94A0', line: i === s.calcStep ? '#123E6B' : 'transparent', go: () => this.setState({ calcStep: i }) })),
+      s0: s.calcStep === 0, s1: s.calcStep === 1, s2: s.calcStep === 2,
+      calcTypes: this.TYPES.map((o, i) => ({ n: o.n, meta: 'dan ' + this.fmt(o.base), ...opt(i === s.calcType), pick: () => this.setState({ calcType: i }) })),
+      calcMods: this.MODS.map((o, i) => { const sel = s.calcMods.includes(i); return { n: o.n, mark: sel ? '✓' : '', box: sel ? '#123E6B' : '#FFFFFF', ...opt(sel), pick: () => this.setState(st => ({ calcMods: sel ? st.calcMods.filter(x => x !== i) : [...st.calcMods, i].sort() })) }; }),
+      calcSpeed: this.SPEED.map((o, i) => ({ ...o, ...opt(i === s.calcRush), pick: () => this.setState({ calcRush: i }) })),
+      calcPrev: () => this.setState(st => ({ calcStep: Math.max(0, st.calcStep - 1) })),
+      calcNext: () => s.calcStep < 2 ? this.setState({ calcStep: s.calcStep + 1 }) : this.setState({ rfp: true, sent: false }),
+      nextLabel: s.calcStep < 2 ? t.next : t.done,
+      est,
+      stages: this.STAGES.map((p, i) => ({ ...p, no: '0' + (i + 1) }))
+    };
+  }
+}
+</script>
+</body>
+</html>
